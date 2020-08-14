@@ -10,6 +10,8 @@ export async function up(knex: Knex) {
     table.string('whatsapp').notNullable();
     table.string('bio').notNullable();
     table.boolean('is_teacher').notNullable();
+    table.string('password_reset_token').nullable();
+    table.string('password_reset_expires').nullable();
   });
 }
 
