@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 
-import authConfig from '../config/auth';
+import authConfig from '../../config/auth';
 
-import db from '../database/connection';
+import db from '../../database/connection';
 
 export default class SessionController {
   async create(req: Request, res: Response) {

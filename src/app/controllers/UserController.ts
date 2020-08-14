@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { hash } from 'bcryptjs';
 
-import db from '../database/connection';
+import db from '../../database/connection';
 
 export default class UserController {
   async create(req: Request, res: Response) {
