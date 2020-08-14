@@ -2,12 +2,12 @@ import express from 'express';
 
 const routes = express.Router();
 
-import ClassesController from './controllers/ClassesController';
-import ConnectionsController from './controllers/ConnectionsController';
-import UserController from './controllers/UserController';
-import SessionController from './controllers/SessionController';
+import ClassesController from './app/controllers/ClassesController';
+import ConnectionsController from './app/controllers/ConnectionsController';
+import UserController from './app/controllers/UserController';
+import SessionController from './app/controllers/SessionController';
 
-import auth from './middlewares/auth';
+import auth from './app/middlewares/auth';
 
 const classesController = new ClassesController();
 const connectionsController = new ConnectionsController();
