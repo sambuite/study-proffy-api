@@ -4,6 +4,7 @@ import crypto from 'crypto';
 
 import db from '../../database/connection';
 import mailer from '../modules/mailer';
+import { Options } from 'nodemailer/lib/mailer';
 
 export default class UserPasswordController {
   async create(req: Request, res: Response) {
@@ -34,7 +35,7 @@ export default class UserPasswordController {
           context: {
             token,
           },
-        },
+        } as Options,
         (error) => {
           if (error) console.log('sendmail error', error);
         }
@@ -72,7 +73,7 @@ export default class UserPasswordController {
 
       const hashPassword = await hash(newPassword, 8);
 
-      const d = await db('users').where('email', email).update({
+      await db('users').where('email', email).update({
         password: hashPassword,
       });
 
