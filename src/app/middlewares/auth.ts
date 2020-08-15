@@ -23,11 +23,11 @@ export default async function auth(
   const [, token] = authorization.split(' ');
 
   try {
-    const decoded = await verify(token, authConfig.secret as string);
+    const decoded = verify(token, authConfig.secret as string);
 
     const { userId } = decoded as TokenPayload;
 
-    req.headers.userId = userId.toString();
+    req.userId = userId;
 
     return next();
   } catch (err) {
