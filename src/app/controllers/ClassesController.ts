@@ -17,6 +17,13 @@ export default class ClassesController {
     const week_day = filters.week_day as string;
     const time = filters.time as string;
 
+    if (!filters.week_day && !filters.subject && !filters.time) {
+      const classes = await db('classes')
+        .join('users', 'classes.user_id', '=', 'users.id')
+        .select(['classes.*', 'users.*']);
+      return res.json(classes);
+    }
+
     if (!filters.week_day || !filters.subject || !filters.time) {
       return res.status(400).json({
         error: 'Missing filters to search classes',
@@ -42,20 +49,11 @@ export default class ClassesController {
   }
 
   async create(req: Request, res: Response) {
-    const { name, avatar, whatsapp, bio, subject, cost, schedule } = req.body;
-
+    const { subject, cost, schedule } = req.body;
+    const user_id = req.userId;
     const trx = await db.transaction();
 
     try {
-      const insertedUsersIds = await trx('users').insert({
-        name,
-        avatar,
-        whatsapp,
-        bio,
-      });
-
-      const user_id = insertedUsersIds[0];
-
       const insertedClassesIds = await trx('classes').insert({
         subject,
         cost,
