@@ -25,6 +25,8 @@ routes.post('/reset_password', userPasswordController.edit);
 
 routes.use(auth);
 
+routes.put('/profile', userController.edit);
+
 routes.get('/classes', classesController.index);
 routes.post('/classes', classesController.create);
 
